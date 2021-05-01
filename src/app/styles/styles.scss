@@ -1,0 +1,107 @@
+@import url(./glider.scss);
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(235, 20, 20);
+}
+.menu{
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+    &__button{
+        height: fit-content;
+        border-radius: 5px;
+    }
+    &__elements{
+        display: none;
+        position: absolute;
+        background-color: white;
+        list-style: none;
+        padding: 10px;
+        left: 5%;
+        line-height: 25px;
+        border: solid;
+        border-radius: 10px;
+        border-color: rgb(235, 20, 20);
+    }
+}
+.finder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__input{
+        input{
+            width: 120px;
+        }
+    }
+    &__button{
+        margin-right: 5%;
+        img{
+            height: 40px;
+        }
+    }
+}
+
+.main{
+    background: linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.7)),url('../assets/background.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.logo{
+    img{
+        width: 100%;
+        margin-top: 25px;
+        margin-bottom: 30px;
+    }
+}
+.front{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 25px;
+    &__grid{
+        position: relative;
+        display: flex;
+        &__character{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            line-height: 0px;
+            margin-right: 10px;
+            margin-left: 10px;
+            img{
+               height: 120px
+            }
+        }
+    }
+    &__as{
+        position: relative;
+        display: flex;
+        img{
+            width: 60%;
+        }
+        &__dialogue{
+            position: absolute;
+            right: 18px;
+            background-color: rgb(255, 255, 255);
+            width: 100px;
+            height: 75px;
+            border:none;
+            border-radius: 60%;
+            box-shadow: 0px 0px 6px 5px rgba(235, 20, 20, 0.7);
+        }
+    }
+}
+.front__as__dialogue::before{
+    content:"";
+    width: 0;
+    height: 0;
+    position: absolute;
+    margin: 50px 0 0 -24px;
+    border-bottom: 20px solid rgb(255, 255, 255);
+    border-right: 20px solid transparent;
+    border-left: 30px solid transparent;
+    transform: rotate(-10deg);
+}

@@ -10,6 +10,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
     >
+    <link 
+    rel="stylesheet" 
+    href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    >
     <!-- Normalize -->
     <link
       rel="stylesheet"
@@ -20,11 +24,28 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
     >
-  </head>
 
   <body id="body">
     <header class="header">
-      Header
+      <div class="menu">
+        <button id='menuButton' class="menu__button">
+          <span class="fas fa-bars"></span>
+        </button>
+        <div id="menu">
+          <ul id ='menuElements'class='menu__elements'>
+            <li id='menuHome'>Home</li>
+            <li id='menuArena'>Arena</li>
+          </ul>
+        </div>
+      </div>
+      <div class='finder' >
+        <div class="finder__input">
+          <input id='findInput' type="text" placeholder="Busca tu pokemon">
+        </div>
+        <div class="finder__button">
+          <img id="findButton" src="../src/app/assets/pokeball_good_resolution.png" alt="pokeball svg">
+        </div>
+      </div>  
     </header>
 
     <section id="loader" class="loader is-hidden">
@@ -32,34 +53,23 @@
     </section>
 
     <main class="main">
-      <div class="container">
-        <img class="logo" src="assets/logo.png" alt="logo">
-        <h1 class="title">Pokedex</h1>
-
-        <div class="pokeball-container">
-          <div>
-            <button id="allPokemons" class="btn btn-link pokeball" type="button"></button>
-            <span>Pokemon List</span>
-          </div>
-
-          <div>
-            <button id="randomPokemon" class="btn btn-link pokeball" type="button"></button>
-            <span>Randomizer Pokemon</span>
-          </div>
-        </div>
-
-        <div class="find-container">
-          <span>Pokemon Finder</span>
-          <input id="pokeName" class="find">
-          <button id="pokeFinder" class="find-button">Go!</button>
-        </div>
-
-        <ul id="pokedex" class="flex-container wrap"></ul>
+      <div class="logo">
+        <img  src="assets/logo.png" alt="logo">
       </div>
+      <div class="front">
+        <div id="grid" class='front__grid '>
+        </div>
+      </div>
+      <div class="front__as">
+        <img src="src\app\assets\ash.png" alt="">
+        <div class="front__as__dialogue"></div>
+      </div>
+      <div id="pokemonDetail"></div>
     </main>
 
     <footer class="footer">
-      Footer
+    
     </footer>
+
   </body>
 </html>
