@@ -2,9 +2,10 @@
 import './styles/styles.scss';
 import 'bootstrap';
 import{displayPokemonData} from '../app/views/view-detail'
-import { displayPokemonList,} from './views/view-list';
+import { displayPokemonList, loadCarrousel} from './views/view-list';
 import{ glider } from './utils/glider';
-import {displayMenu} from './utils/menu'
+import {displayMenu, } from './utils/menu'
+import {displayEnemyPokemon, } from './views/view-random'
 
 window.addEventListener('load' ,()=>{
     new Glider (document.querySelector('.front__grid'), {
@@ -25,11 +26,18 @@ const addListeners = () => {
     document.getElementById('menuButton').addEventListener('click',(event)=>{
         displayMenu();
     })
+    document.getElementById('menuArena').addEventListener('click', (event)=>{
+        displayEnemyPokemon()
+    })
+    document.getElementById('menuHome').addEventListener('click', (event)=>{
+        location.reload()
+    })
 };
 
 window.onload = () =>{
     addListeners(),
-    displayPokemonList()
+    displayPokemonList(),
+    loadCarrousel()
     // displayPokemonData()
     // displaySelectedPokemon()
 };

@@ -1,9 +1,11 @@
 import {fetchPokemonList,}from '../api/call-to-API'
 import{displayPokemonData} from './view-detail'
 
+let offset = 0;
+
 const displayPokemonList = () => {
 
-    const pokemonListPromise = fetchPokemonList();
+    const pokemonListPromise = fetchPokemonList(offset);
     let i = 1;
     pokemonListPromise.then((pokemonList)=>{
         const father = document.getElementById('grid');
@@ -27,7 +29,7 @@ const displayPokemonList = () => {
             son.appendChild(sonNumber);
             son.appendChild(sonImage); 
 
-            document.querySelector(`.front__grid__character${i}`).addEventListener('touchmove',(event)=>{
+            document.querySelector(`.front__grid__character${i}`).addEventListener('click',(event)=>{
                 const clickPokemon = event.currentTarget.firstChild.innerHTML;
                 displayPokemonData(clickPokemon);
             });
@@ -36,10 +38,19 @@ const displayPokemonList = () => {
     });
 };
 
-
+const loadCarrousel = () => {
+    document.getElementById('grid').addEventListener('touchmove',(event)=>{
+        if (document.querySelector(`.front__grid__character10`).scrollIntoView) {
+            offset += 10;
+        }
+        if (document.getElementById('grid').childElementCount >1 && offset < 141) {
+            displayPokemonList(event, offset)
+        }
+    })
+}
 
 
 export {
     displayPokemonList,
-
+    loadCarrousel
 }

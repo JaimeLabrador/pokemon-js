@@ -8,6 +8,9 @@
 //             <li id='menuArena'>Arena</li>
 //         </ul>`;
 //     menuButton.innerHTML = displayMenuOptionsHTML
+
+import { displayPokemonList } from "../views/view-list"
+
     
 //     // if (document.querySelector('.menu__elements').getElementsByClassName.display != 'none') {
 //     //     menuButton.innerHTML = displayMenuOptionsHTML      
@@ -30,4 +33,6 @@ const displayMenu = () => {
     }
 }
 
-export {displayMenu};
+
+
+export {displayMenu, };

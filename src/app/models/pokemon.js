@@ -15,20 +15,30 @@ class pokemonClass {
         return this.image;
     }
     getPokemonType(){
-        return this.type
+        return this.type;
     }
-    setPokemonAlias(pokemonAlias) {
-        this.name=pokemonAlias;
-    }
+
 }
 
 class pokemonDetailClass extends pokemonClass {
-    constructor (id, name,image, type, attacks) {
+    constructor (id, name,image, type, attack, pixelImage, baseExperience, weight) {
         super(id, name, image, type);
-        this.attacks=attacks;
+        this.attack=attack;
+        this.pixelImage=pixelImage
+        this.baseExperience=baseExperience
+        this.weight=weight
     }
     getPokemonAttacks() {
-        return this.attacks;
+        return this.attack;
+    }
+    getPixelImage() {
+        return this.pixelImage;
+    }
+    getBaseExperience() {
+        return this.baseExperience
+    }
+    getWeight () {
+        return this.weight
     }
 }
 

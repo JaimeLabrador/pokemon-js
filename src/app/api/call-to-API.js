@@ -1,5 +1,5 @@
-const fetchPokemonList = async () => {
-    const endPoint = `https://pokeapi.co/api/v2/pokemon/`;
+const fetchPokemonList = async (offset) => {
+    const endPoint = `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${offset}`;
     const pokemonListRequest = await fetch(endPoint)
         .catch((error)=> console.log(error));
     const result = await pokemonListRequest.json();
