@@ -31,6 +31,8 @@ const displayPokemonData = async () => {
             <h3 class='showDetails__attack__name'>${attackString}</h3>
         </div>`;
     container.innerHTML = pokemonDetailHTML;
+
+    document.getElementById('grid').classList.add('detail');
 };
 
 

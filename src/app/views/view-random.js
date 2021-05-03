@@ -1,3 +1,4 @@
+import { event } from 'jquery';
 import {fetchPokemonDetail} from '../api/call-to -API-detail';
 import {pokemonDetailClass} from '../models/pokemon'
 
@@ -7,43 +8,48 @@ const container = document.getElementById('grid');
 const displayPlayerPokemon = async () => {
     const pokemonName = document.getElementById('arenaInput').value;
     const pokemon = await fetchPokemonDetail(pokemonName);
-    const newPokemon = new pokemonDetailClass(
+    const newPokemonPlayer = new pokemonDetailClass(
         pokemon.name,
         pokemon.pixelImage,
         pokemon.weight,
-        pokemon.attack
+        pokemon.attack,
+        pokemon.type,
+        pokemon.baseExperience
     );
 
-    const pokemonAttacks = newPokemon.getPokemonAttacks();
+    const pokemonAttacks = pokemon.attack;
     let attackString = '';
 
-    for (let index = 0; index < pokemon.attack.length; index++) {
+    for (let index = 0; index < pokemonAttacks.length; index++) {
     attackString += `<div>${index+1} - ${pokemon.attack[index].ability.name}</div>`
     }
 
     let playerPokemon= document.createElement('div');
     playerPokemon.setAttribute('id','arenaMain');
+    playerPokemon.classList.add('arena__main')
     container.appendChild(playerPokemon);
    
     let playerPokemonImg= document.createElement('img');
-    playerPokemonImg.src=newPokemon.name
+    playerPokemonImg.src=newPokemonPlayer.name
     playerPokemon.appendChild(playerPokemonImg);
     
     let playerPokemonName= document.createElement('h2');
-    playerPokemonName.innerHTML=newPokemon.id
+    playerPokemonName.innerHTML=newPokemonPlayer.id
     playerPokemon.appendChild(playerPokemonName);
 
     document.getElementById('arenaInput').style.display='none'
     document.getElementById('arenaButton').style.display='none'
+    document.getElementById('grid').style.flexDirection='row-reverse'
 
     const infoContainer = document.getElementById('infoDiv');
+    document.getElementById('infoDiv').classList.add('arenaInfo')
     let pokemonStatusHTML=
         `<h4>HP: ${pokemon.weight}</h4>
         <h4>Attacks:</h4>
-        <h4>${attackString}</h4>`
+        <h4 id='attacks'>${attackString}</h4>`
     infoContainer.innerHTML = pokemonStatusHTML
+  
 };
-
 
 
 
@@ -53,28 +59,35 @@ const displayEnemyPokemon = async () => {
         return randomNumber;
     }
     const pokemon = await fetchPokemonDetail(pokemonName());
-    const newPokemon = new pokemonDetailClass(
+    const newPokemonEnemy = new pokemonDetailClass(
         pokemon.name,
         pokemon.pixelImage,
+        pokemon.type,
+        pokemon.baseExperience
     );
 
     const pokemonDetailHTML = 
         `<input id='arenaInput' type='text' placeholder='Escoje a tu pokemon!'>
-        <button id='arenaButton'></button>
+        <button id='arenaButton'>Fight!</button>
         <div class='arena__enemy'>
-            <img class='showDetails__image' src='${newPokemon.name}'/>
-            <h2 class='showDetails__name'>${newPokemon.id}</h2>
+            <img class='showDetails__image' src='${newPokemonEnemy.name}'/>
+            <h2 class='showDetails__name'>${newPokemonEnemy.id}</h2>
         </div>`;
 
     container.innerHTML = pokemonDetailHTML;
-
-    document.getElementById('grid').style.backgroundImage=`url('../assets/arena-back.jpg')`;
-    document.getElementById('grid').style.backgroundSize='cover';
+    
+    document.getElementById('grid').classList.add('arena');
+    const arenaTitle= document.getElementById('logo');
+    const arenaSubTitle = document.createElement('h2');
+    arenaSubTitle.innerHTML='ARENA';
+    arenaTitle.appendChild(arenaSubTitle);
 
     document.getElementById('arenaButton').addEventListener('click',(event)=>{
         displayPlayerPokemon()
     })
-
 };
+
+
+
 
 export {displayEnemyPokemon,}

@@ -5,6 +5,7 @@ import{displayPokemonData} from '../app/views/view-detail'
 import { displayPokemonList, loadCarrousel} from './views/view-list';
 import{ glider } from './utils/glider';
 import {displayMenu, } from './utils/menu'
+import {talk, } from './utils/talk'
 import {displayEnemyPokemon, } from './views/view-random'
 
 window.addEventListener('load' ,()=>{
@@ -37,7 +38,8 @@ const addListeners = () => {
 window.onload = () =>{
     addListeners(),
     displayPokemonList(),
-    loadCarrousel()
+    loadCarrousel(),
+    talk()
     // displayPokemonData()
     // displaySelectedPokemon()
 };

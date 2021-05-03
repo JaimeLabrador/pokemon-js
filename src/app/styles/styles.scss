@@ -1,10 +1,17 @@
 @import url(./glider.scss);
 
+#body{
+    font-family: 'Indie Flower', cursive;
+}
+
+
 .header{
     display: flex;
     justify-content: space-between;
     background-color: rgb(235, 20, 20);
 }
+
+
 .menu{
     display: flex;
     align-items: center;
@@ -26,13 +33,15 @@
         border-color: rgb(235, 20, 20);
     }
 }
+
+
 .finder{
     display: flex;
     justify-content: center;
     align-items: center;
     &__input{
         input{
-            width: 120px;
+            width: 140px;
         }
     }
     &__button{
@@ -43,18 +52,28 @@
     }
 }
 
+
 .main{
     background: linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.7)),url('../assets/background.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
 .logo{
+    text-align: center;
+    font-size: 25px;
+    h2{
+        margin-top: 0px;
+    }
     img{
         width: 100%;
         margin-top: 25px;
         margin-bottom: 30px;
     }
 }
+
+
 .front{
     margin-left: 5px;
     margin-right: 5px;
@@ -79,18 +98,31 @@
     &__as{
         position: relative;
         display: flex;
+        margin-left: 5%;
         img{
+            animation: fadeInLeft;
+            animation-duration: 1s;
             width: 60%;
+            max-width: 235px;
+            max-height: 250px;
         }
         &__dialogue{
+            animation: bounceIn;
+            animation-duration: 1s;
             position: absolute;
-            right: 18px;
+            left:55%;
             background-color: rgb(255, 255, 255);
-            width: 100px;
-            height: 75px;
+            width: 120px;
+            height: 80px;
             border:none;
             border-radius: 60%;
             box-shadow: 0px 0px 6px 5px rgba(235, 20, 20, 0.7);
+            p{
+                text-align: center;
+                font-size: 14px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
         }
     }
 }
@@ -104,4 +136,91 @@
     border-right: 20px solid transparent;
     border-left: 30px solid transparent;
     transform: rotate(-10deg);
+}
+
+.detail{
+    justify-content: center;
+    align-items: center;
+}
+.showDetails{
+    display: flex;
+    flex-direction: column;
+    &__image{
+        width: 100%;
+        transform: scaleX(-1);
+    }
+    h2{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    h3{
+        margin-top: 8px;
+    }
+}
+
+
+
+.arena{
+    background-image: url('../assets/arena-back-2.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    justify-content: space-around;
+    width: 100%;
+    border: solid;
+    border-color: rgb(235, 20, 20);
+    height: 190px;
+    input{
+        width: 160px;
+        font-size: 16px;
+        align-self: center;
+    }
+    button{
+        width: fit-content;
+        align-self: center;
+        font-size: 16px;
+    }
+    &__enemy{
+        width: 33%;
+        display: flex;
+        align-self: center;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    &__main{
+        width: 33%;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        img{
+            transform: scaleX(-1);
+        }
+    }
+}
+
+
+.arenaInfo{
+    display: flex;
+    flex-direction: column;
+    h4{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+
+
+.footer__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color:  rgb(235, 20, 20);
+    color: white;
+    h5{
+        margin:10px
+        
+    }
 }
