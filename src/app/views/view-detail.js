@@ -2,9 +2,8 @@ import {fetchPokemonDetail} from '../api/call-to -API-detail';
 import {pokemonDetailClass} from '../models/pokemon'
 
 
-const displayPokemonData = async () => {
+const displayPokemonData = async (pokemonName) => {
     const container = document.getElementById('grid');
-    const pokemonName = document.getElementById('findInput').value;
     const pokemon = await fetchPokemonDetail(pokemonName);
 
     const newPokemon = new pokemonDetailClass(

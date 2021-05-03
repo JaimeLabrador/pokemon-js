@@ -1,10 +1,19 @@
+import {spinner} from '../utils/pokemon-utils'
 
 
 const fetchPokemonDetail = async (pokemonName) => {
+    spinner.loader();
+
     const endPoint = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`;
 
     const pokemonDetailRequest = await fetch(endPoint)
     .catch((error)=> console.log(error));
+
+    if (pokemonDetailRequest.status!==200) {
+        spinner.hanleError({message:'error'});
+        spinner.loader;
+        return Promise.reject;
+    }
 
     const pokemonDetailAnswer = await pokemonDetailRequest.json();
 
@@ -18,6 +27,8 @@ const fetchPokemonDetail = async (pokemonName) => {
         baseExperience:pokemonDetailAnswer.base_experience,
         weight:pokemonDetailAnswer.weight
         };
+        spinner.loader();
+
         return pokemonAtributes
 }
 

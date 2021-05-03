@@ -2,11 +2,10 @@ import {fetchPokemonList,}from '../api/call-to-API'
 import{displayPokemonData} from './view-detail'
 
 let offset = 0;
-
+let i = 1;
 const displayPokemonList = () => {
 
     const pokemonListPromise = fetchPokemonList(offset);
-    let i = 1;
     pokemonListPromise.then((pokemonList)=>{
         const father = document.getElementById('grid');
         pokemonList.forEach(pokemonElement => {
@@ -39,9 +38,10 @@ const displayPokemonList = () => {
 };
 
 const loadCarrousel = () => {
-    document.getElementById('grid').addEventListener('touchmove',(event)=>{
+    document.getElementById('grid').addEventListener('touchend',(event)=>{
         if (document.querySelector(`.front__grid__character10`).scrollIntoView) {
             offset += 10;
+            i+=1
         }
         if (document.getElementById('grid').childElementCount >1 && offset < 141) {
             displayPokemonList(event, offset)

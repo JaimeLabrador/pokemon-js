@@ -48,6 +48,7 @@ const displayPlayerPokemon = async () => {
         <h4>Attacks:</h4>
         <h4 id='attacks'>${attackString}</h4>`
     infoContainer.innerHTML = pokemonStatusHTML
+    return newPokemonPlayer
   
 };
 
@@ -85,7 +86,18 @@ const displayEnemyPokemon = async () => {
     document.getElementById('arenaButton').addEventListener('click',(event)=>{
         displayPlayerPokemon()
     })
+    return newPokemonEnemy
 };
+
+// const battel = async () => {
+
+//     const player = await displayPlayerPokemon();
+//     const enemy = await displayEnemyPokemon();
+
+//     const playerPokemon = newPokemonPlayer;
+//     const enemyPokemon= newPokemonEnemy;
+    
+// }
 
 
 

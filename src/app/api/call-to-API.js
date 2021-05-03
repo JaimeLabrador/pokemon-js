@@ -1,7 +1,18 @@
+
+import {spinner} from '../utils/pokemon-utils'
+
+
 const fetchPokemonList = async (offset) => {
+    spinner.loader();
     const endPoint = `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${offset}`;
     const pokemonListRequest = await fetch(endPoint)
         .catch((error)=> console.log(error));
+
+    if (pokemonListRequest.status!==200) {
+        spinner.hanleError({message:'error'});
+        spinner.loader;
+        return Promise.reject;
+    }
     const result = await pokemonListRequest.json();
 
     const getIdUrl = (endPoint) =>{
@@ -16,6 +27,8 @@ const fetchPokemonList = async (offset) => {
     };
     const pokemonAtributes = result.results.map (({name, url}) =>
         ({name, id:getIdUrl(url), img:getImg(url)}));
+    
+    spinner.loader();
     return pokemonAtributes;
 };
 
