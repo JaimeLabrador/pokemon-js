@@ -6,7 +6,7 @@ import { displayPokemonList, loadCarrousel} from './views/view-list';
 import{ glider } from './utils/glider';
 import {displayMenu, } from './utils/menu'
 import {talk, } from './utils/talk'
-import {displayEnemyPokemon, } from './views/view-random'
+import {displayEnemyPokemon,} from './views/view-random'
 
 window.addEventListener('load' ,()=>{
     new Glider (document.querySelector('.front__grid'), {
@@ -33,6 +33,7 @@ const addListeners = () => {
     document.getElementById('menuHome').addEventListener('click', (event)=>{
         location.reload()
     })
+
 };
 
 window.onload = () =>{

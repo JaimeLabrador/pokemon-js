@@ -30,10 +30,12 @@ const displayPlayerPokemon = async () => {
     container.appendChild(playerPokemon);
    
     let playerPokemonImg= document.createElement('img');
-    playerPokemonImg.src=newPokemonPlayer.name
+    playerPokemonImg.setAttribute('id', 'playerPokemonImage');
+    playerPokemonImg.src=newPokemonPlayer.name;
     playerPokemon.appendChild(playerPokemonImg);
     
     let playerPokemonName= document.createElement('h2');
+    playerPokemonName.setAttribute('id', 'arenaPlayerName');
     playerPokemonName.innerHTML=newPokemonPlayer.id
     playerPokemon.appendChild(playerPokemonName);
 
@@ -44,10 +46,16 @@ const displayPlayerPokemon = async () => {
     const infoContainer = document.getElementById('infoDiv');
     document.getElementById('infoDiv').classList.add('arenaInfo')
     let pokemonStatusHTML=
-        `<h4>HP: ${pokemon.weight}</h4>
+        `<h4 id='playerHP'>HP: ${pokemon.weight}</h4>
         <h4>Attacks:</h4>
         <h4 id='attacks'>${attackString}</h4>`
+        
     infoContainer.innerHTML = pokemonStatusHTML
+
+    document.getElementById('attacks').addEventListener('click', (event)=>{
+        battel();
+    });
+
     return newPokemonPlayer
   
 };
@@ -64,15 +72,17 @@ const displayEnemyPokemon = async () => {
         pokemon.name,
         pokemon.pixelImage,
         pokemon.type,
-        pokemon.baseExperience
+        pokemon.baseExperience,
+        pokemon.weight
     );
 
     const pokemonDetailHTML = 
         `<input id='arenaInput' type='text' placeholder='Escoje a tu pokemon!'>
         <button id='arenaButton'>Fight!</button>
-        <div class='arena__enemy'>
-            <img class='showDetails__image' src='${newPokemonEnemy.name}'/>
-            <h2 class='showDetails__name'>${newPokemonEnemy.id}</h2>
+        <div id='arenaEnemy' class='arena__enemy'>
+            <img id='pokemonEnemyImage' class='showDetails__image' src='${newPokemonEnemy.name}'/>
+            <h2 id='enemyHP'>HP:${pokemon.weight}</h2>
+            <h2 id='arenaEnemyName' class='showDetails__name'>${newPokemonEnemy.id}</h2>
         </div>`;
 
     container.innerHTML = pokemonDetailHTML;
@@ -89,17 +99,56 @@ const displayEnemyPokemon = async () => {
     return newPokemonEnemy
 };
 
-// const battel = async () => {
-
-//     const player = await displayPlayerPokemon();
-//     const enemy = await displayEnemyPokemon();
-
-//     const playerPokemon = newPokemonPlayer;
-//     const enemyPokemon= newPokemonEnemy;
+const battel = async () => {
     
-// }
+    const arena = document.getElementById('grid');
+    const playerHP=document.getElementById('playerHP');
+    const enemyHP=document.getElementById('enemyHP');
+    const playerPokemonImage = document.getElementById('playerPokemonImage')
+    const enemyPokemonImage = document.getElementById('pokemonEnemyImage')
+    
+    let enemyID = document.getElementById('arenaEnemyName');
+    const pokemonEnemyName = enemyID.innerHTML;
+    
+    let mainID = document.getElementById('arenaPlayerName');
+    const pokemonPlayerName=mainID.innerHTML;
+    
+    const enemyPokemon = await fetchPokemonDetail(pokemonEnemyName);
+    const playerPokemon = await fetchPokemonDetail(pokemonPlayerName);
+    
+    let enemyPokemonHP = parseInt(enemyHP.innerHTML.replace(/[: H P]+/g,''), 10);
+    const enemyPokemonDMG= enemyPokemon.baseExperience;
+    let playerPokemonHP= parseInt(playerHP.innerHTML.replace(/[: H P]+/g,''), 10);
+    const playerPokemonDMG= playerPokemon.baseExperience;
+
+    playerPokemonImage.classList.toggle('animate');
+    const newEnemyHP= `HP: ${enemyPokemonHP-(playerPokemonDMG/4)}`;
+    enemyHP.innerHTML = newEnemyHP;
+
+    setTimeout(() => {
+        enemyPokemonImage.classList.toggle('animate');
+        const newPlayerHP= `HP: ${playerPokemonHP-(enemyPokemonDMG/4)}`;
+        playerHP.innerHTML= newPlayerHP;
+        if (parseInt(newPlayerHP.replace(/[: H P]+/g,''), 10) <= 0) {
+            const defeat = `<h4>DEFEAT! Try again!</h4>`;
+            arena.innerHTML=defeat
+        };
+    }, 2000);
+    
+    if (parseInt(newEnemyHP.replace(/[: H P]+/g,''), 10)<= 0) {
+        const victory = `<h4>YOU WIN!</h4>`;
+        arena.innerHTML=victory
+    };
+
+    setTimeout(() => {
+        playerPokemonImage.classList.toggle('animate');
+        enemyPokemonImage.classList.toggle('animate');
+    }, 1000);
+};
 
 
 
 
-export {displayEnemyPokemon,}
+export {displayEnemyPokemon,battel}
+
+
