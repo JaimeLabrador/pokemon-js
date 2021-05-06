@@ -33,6 +33,4 @@ const fetchPokemonDetail = async (pokemonName) => {
 }
 
 
-
-
 export {fetchPokemonDetail}

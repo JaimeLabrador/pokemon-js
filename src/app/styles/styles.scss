@@ -102,8 +102,11 @@
     &__as{
         position: relative;
         display: flex;
+        justify-content: center;
         margin-left: 5%;
         img{
+            position: relative;
+            right:80px;
             animation: fadeInLeft;
             animation-duration: 1s;
             width: 60%;
@@ -114,7 +117,7 @@
             animation: bounceIn;
             animation-duration: 1s;
             position: absolute;
-            left:55%;
+            left:52%;
             background-color: rgb(255, 255, 255);
             width: 120px;
             height: 80px;
@@ -230,28 +233,3 @@
 }
 
 
-.pokeball{
-    background-image: url('../assets/pokeball.png');
-    background-size: 100%;
-    cursor: pointer;
-    color:white;
-    text-decoration: none;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    &:hover{
-        -webkit-animation: shak 0.3s infinite;
-        -moz-animation: shak 0.3s infinite;
-        color: white;
-        text-decoration: none;
-    }
-    &:focus{
-        outline: none;
-        box-shadow: none;
-    }
-}
-
-
-.is-hidden{
-    display: none;
-}

@@ -1,6 +1,6 @@
-import { event } from 'jquery';
 import {fetchPokemonDetail} from '../api/call-to -API-detail';
-import {pokemonDetailClass} from '../models/pokemon'
+import {pokemonDetailClass} from '../models/pokemon';
+import {fetchEnemyPokemonType, fetchPlayerPokemonType} from '../api/call-to-API-type';
 
 
 const container = document.getElementById('grid');
@@ -99,6 +99,7 @@ const displayEnemyPokemon = async () => {
     return newPokemonEnemy
 };
 
+
 const battel = async () => {
     
     const arena = document.getElementById('grid');
@@ -118,27 +119,66 @@ const battel = async () => {
     
     let enemyPokemonHP = parseInt(enemyHP.innerHTML.replace(/[: H P]+/g,''), 10);
     const enemyPokemonDMG= enemyPokemon.baseExperience;
+    let enemyType = enemyPokemon.type;
+
     let playerPokemonHP= parseInt(playerHP.innerHTML.replace(/[: H P]+/g,''), 10);
     const playerPokemonDMG= playerPokemon.baseExperience;
+    let playerType = playerPokemon.type;
+
+    let enemyTypes = enemyType.split(', ');
+    let playerTypes = playerType.split(", ");
 
     playerPokemonImage.classList.toggle('animate');
-    const newEnemyHP= `HP: ${enemyPokemonHP-(playerPokemonDMG/4)}`;
-    enemyHP.innerHTML = newEnemyHP;
+
+    playerTypes.forEach(async playerType => {
+       let playerDamageRelation = await fetchEnemyPokemonType(playerType);
+    if (playerDamageRelation.noDamageTo.includes(enemyType) ) {
+        let newEnemyHP = `HP : ${enemyPokemonHP}`;
+        enemyHP.innerHTML= newEnemyHP;
+    };
+    if (playerDamageRelation.halfDamageTo.includes(enemyType)) {
+        let newEnemyHP = `HP : ${Math.round(enemyPokemonHP-((playerPokemonDMG/3)/2))}`;
+        enemyHP.innerHTML= newEnemyHP;
+    };
+    if (playerDamageRelation.doubleDamageTo.includes(enemyType)) {
+        let newEnemyHP = `HP : ${Math.round(enemyPokemonHP-((playerPokemonDMG/3)*2))}`;
+        enemyHP.innerHTML= newEnemyHP;
+    }else{
+        let newEnemyHP = `HP : ${Math.round(enemyPokemonHP-((playerPokemonDMG/3)))}`;
+        enemyHP.innerHTML= newEnemyHP;
+    };
+    if (parseInt(enemyHP.innerHTML.replace(/[: H P]+/g,''), 10)<= 0) {
+        const victory = `<h4>YOU WIN!</h4>`;
+        arena.innerHTML=victory;
+    };
+    });
 
     setTimeout(() => {
         enemyPokemonImage.classList.toggle('animate');
-        const newPlayerHP= `HP: ${playerPokemonHP-(enemyPokemonDMG/4)}`;
-        playerHP.innerHTML= newPlayerHP;
-        if (parseInt(newPlayerHP.replace(/[: H P]+/g,''), 10) <= 0) {
-            const defeat = `<h4>DEFEAT! Try again!</h4>`;
-            arena.innerHTML=defeat
+        enemyTypes.forEach(async enemyType => {
+            let enemyDamageRelation = await fetchEnemyPokemonType(enemyType);
+        if (enemyDamageRelation.noDamageTo.includes(playerType) ) {
+            let newPlayerHP = `HP : ${playerPokemonHP}`;
+            playerHP.innerHTML= newPlayerHP;
         };
+        if (enemyDamageRelation.halfDamageTo.includes(playerType)) {
+            let newPlayerHP = `HP : ${Math.round (playerPokemonHP-((enemyPokemonDMG/3)/2))}`;
+            playerHP.innerHTML= newPlayerHP;
+        };
+        if (enemyDamageRelation.doubleDamageTo.includes(playerType)) {
+            let newPlayerHP = `HP : ${Math.round (playerPokemonHP-((enemyPokemonDMG/3)*2))}`;
+            playerHP.innerHTML= newPlayerHP;
+        }else{
+            let newPlayerHP = `HP : ${Math.round (playerPokemonHP-((enemyPokemonDMG/3)))}`;
+            playerHP.innerHTML= newPlayerHP;
+        };
+        if (parseInt(playerHP.innerHTML.replace(/[: H P]+/g,''), 10)<= 0) {
+            const victory = `<h4>DEFEAT!</h4>`;
+            arena.innerHTML=victory;
+        };
+        });
+
     }, 2000);
-    
-    if (parseInt(newEnemyHP.replace(/[: H P]+/g,''), 10)<= 0) {
-        const victory = `<h4>YOU WIN!</h4>`;
-        arena.innerHTML=victory
-    };
 
     setTimeout(() => {
         playerPokemonImage.classList.toggle('animate');

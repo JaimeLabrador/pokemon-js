@@ -1,5 +1,6 @@
 import {fetchPokemonDetail} from '../api/call-to -API-detail';
-import {pokemonDetailClass} from '../models/pokemon'
+import {fetchPokemonList} from '../api/call-to-API';
+import {pokemonDetailClass} from '../models/pokemon';
 
 
 const displayPokemonData = async (pokemonName) => {
@@ -21,7 +22,7 @@ const displayPokemonData = async (pokemonName) => {
         attackString += `<div>${index+1} - ${pokemonAttacks[index].ability.name}</div>`
     }
     const pokemonDetailHTML = 
-        `<div class='showDetails'>
+        `<div id='showDetails' class='showDetails'>
             <img class='showDetails__image' src='${newPokemon.getPokemonImage()}'/>
             <h2 class='showDetails__name'>Name: ${newPokemon.getPokemonName()}</h2>
             <h2 class='showDetails__id'>Number: ${newPokemon.getPokemonId()}</h2>
@@ -30,8 +31,9 @@ const displayPokemonData = async (pokemonName) => {
             <h3 class='showDetails__attack__name'>${attackString}</h3>
         </div>`;
     container.innerHTML = pokemonDetailHTML;
-
     document.getElementById('grid').classList.add('detail');
+
+
 };
 
 

@@ -16,3 +16,30 @@
     animation: tada;
     animation-duration: 1s;
 }
+
+
+.pokeball{
+    background-image: url('../assets/pokeball.png');
+    background-size: 100%;
+    cursor: pointer;
+    color:white;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    &:hover{
+        -webkit-animation: shak 0.3s infinite;
+        -moz-animation: shak 0.3s infinite;
+        color: white;
+        text-decoration: none;
+    }
+    &:focus{
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+
+.is-hidden{
+    display: none;
+}
