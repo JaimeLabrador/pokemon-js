@@ -7,7 +7,7 @@ const fetchPokemonDetail = async (pokemonName) => {
     const endPoint = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`;
 
     const pokemonDetailRequest = await fetch(endPoint)
-    .catch((error)=> console.log(error));
+        .catch((error)=> console.log(error));
 
     if (pokemonDetailRequest.status!==200) {
         spinner.hanleError({message:'error'});
@@ -33,4 +33,12 @@ const fetchPokemonDetail = async (pokemonName) => {
 }
 
 
-export {fetchPokemonDetail}
+const fetchPokemonDetailRelated = async (i) => {
+    const endPoint = `https://pokeapi.co/api/v2/pokemon/${i}/`
+    const relatedRequest = await fetch(endPoint)
+        .catch((error)=> console.log(error));
+    const relatedAnswer = relatedRequest.json();
+    return relatedAnswer;
+}
+
+export {fetchPokemonDetail, fetchPokemonDetailRelated}

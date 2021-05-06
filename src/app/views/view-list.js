@@ -1,5 +1,5 @@
 import {fetchPokemonList,}from '../api/call-to-API'
-import{displayPokemonData} from './view-detail'
+import{displayPokemonData,} from './view-detail'
 
 let offset = 0;
 let i = 1;

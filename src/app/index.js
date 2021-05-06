@@ -1,7 +1,7 @@
 
 import './styles/styles.scss';
 import 'bootstrap';
-import{displayPokemonData} from '../app/views/view-detail'
+import{displayPokemonData,} from '../app/views/view-detail'
 import { displayPokemonList, loadCarrousel} from './views/view-list';
 import{ glider } from './utils/glider';
 import {displayMenu, } from './utils/menu'
